@@ -102,4 +102,11 @@ public class Album implements Serializable {
 		return true;
 	}
 
+	@Override
+	public String toString() {
+		return naam + " - " + artiest;
+	}
+	
+	
+
 }

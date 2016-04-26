@@ -10,7 +10,8 @@ public class Track implements Serializable {
 
 	private static final long serialVersionUID = 1L;
 
-	private long albumid;
+	
+	//private long albumid;
 	private String naam;
 	private BigDecimal tijd;
 	
