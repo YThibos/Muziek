@@ -21,5 +21,21 @@ public class Track implements Serializable {
 		this.naam = naam;
 		this.tijd = tijd;
 	}
+
+	public String getNaam() {
+		return naam;
+	}
+
+	public BigDecimal getTijd() {
+		return tijd;
+	}
+	
+	public String getSpeeltijd() {
+		String minuten = String.valueOf(tijd.intValue());
+		String seconden = String.valueOf(tijd.remainder(BigDecimal.ONE)
+				.multiply(BigDecimal.valueOf(60))
+				.intValue());
+		return String.format("%s:%s", minuten, seconden);
+	}
 	
 }

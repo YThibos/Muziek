@@ -17,5 +17,9 @@ public class AlbumRepository {
 		return getEntityManager().createNamedQuery("Album.findAll", Album.class)
 				.getResultList();
 	}
+	
+	public Album read(long id) {
+		return getEntityManager().find(Album.class, id);
+	}
 
 }

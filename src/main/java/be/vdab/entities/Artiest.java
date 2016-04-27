@@ -50,14 +50,14 @@ public class Artiest implements Serializable {
 
 	public Album addAlbum(Album album) {
 		getAlbums().add(album);
-		album.setArtiesten(this);
+		album.setArtiest(this);
 
 		return album;
 	}
 
 	public Album removeAlbum(Album album) {
 		getAlbums().remove(album);
-		album.setArtiesten(null);
+		album.setArtiest(null);
 
 		return album;
 	}

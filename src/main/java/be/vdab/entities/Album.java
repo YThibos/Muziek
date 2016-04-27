@@ -1,7 +1,9 @@
 package be.vdab.entities;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Set;
+import java.util.TreeSet;
 
 import javax.persistence.CollectionTable;
 import javax.persistence.ElementCollection;
@@ -59,17 +61,32 @@ public class Album implements Serializable {
 		this.naam = naam;
 	}
 
-	public Artiest getArtiesten() {
+	public Artiest getArtiest() {
 		return this.artiest;
 	}
 
-	public void setArtiesten(Artiest artiesten) {
-		this.artiest = artiesten;
+	public void setArtiest(Artiest artiest) {
+		this.artiest = artiest;
 	}
 	
 	public Set<Track> getTracks() {
-		return tracks;
+//		return tracks.stream()
+//				//.sorted()
+//				.collect(Collectors.toCollection(()-> new TreeSet<Track>((track1, track2) -> track1.getNaam().compareTo(track2.getNaam()))));
+		Set<Track> sortedTrack= new TreeSet<Track>((track1, track2) -> track1.getNaam().compareTo(track2.getNaam()));
+		sortedTrack.addAll(tracks);
+		return sortedTrack;
+				
 	}
+	
+	public String getTotaleSpeeltijd() {
+		BigDecimal totaal = 
+			tracks.stream()
+			.map(Track::getTijd)
+			.reduce(BigDecimal.ZERO, BigDecimal::add);
+		
+		return totaal.toString();
+	} 
 
 	@Override
 	public int hashCode() {
@@ -104,7 +121,7 @@ public class Album implements Serializable {
 
 	@Override
 	public String toString() {
-		return naam + " - " + artiest;
+		return naam;
 	}
 	
 	

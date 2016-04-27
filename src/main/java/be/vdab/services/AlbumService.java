@@ -1,4 +1,4 @@
-package be.vdab.filters;
+package be.vdab.services;
 
 import java.util.List;
 
@@ -11,6 +11,10 @@ public class AlbumService {
 	
 	public List<Album> findAll() {
 		return albumRepository.findAll();
+	}
+	
+	public Album read(long id) {
+		return albumRepository.read(id);
 	}
 
 }

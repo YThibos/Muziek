@@ -6,24 +6,20 @@
 <html>
 
 <head>
-	<v:head title="Welkom"/>
+	<v:head title="Album details"/>
 </head>
 
 <body>
-
-	<h1>Albums</h1>
+	<h1>"${album}" - ${album.artiest}</h1>
 	
 	<dl>
-	<c:forEach items="${albums}" var="album">
-		<dt>
-			<a href="<c:url value='albumDetail.htm?id=${album.id}'/>">${album}</a>
-		</dt>
-		<dd>
-			${album.artiest}
-		</dd>
-		<br>
-	</c:forEach>
+		<c:forEach items="${album.tracks}" var="track">
+			<dt>${track.naam}</dt>
+			<dd>${track.speeltijd}</dd>
+		</c:forEach>
 	</dl>
+	
+	Totale speeltijd: ${album.totaleSpeeltijd }
 
 </body>
 
