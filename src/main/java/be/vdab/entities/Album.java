@@ -2,6 +2,8 @@ package be.vdab.entities;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
+import java.text.DecimalFormat;
 import java.util.Set;
 import java.util.TreeSet;
 
@@ -85,7 +87,13 @@ public class Album implements Serializable {
 			.map(Track::getTijd)
 			.reduce(BigDecimal.ZERO, BigDecimal::add);
 		
-		return totaal.toString();
+		BigDecimal uren = totaal.divide(BigDecimal.valueOf(60), 0, BigDecimal.ROUND_FLOOR);
+		totaal = totaal.remainder(BigDecimal.valueOf(60));
+		BigDecimal minuten = totaal.setScale(0, BigDecimal.ROUND_FLOOR);
+		BigDecimal seconden = totaal.subtract(minuten).multiply(BigDecimal.valueOf(60));
+		
+		DecimalFormat df = new DecimalFormat("00");
+		return String.format("%s:%s:%s", df.format(uren), df.format(minuten), df.format(seconden));
 	} 
 
 	@Override
